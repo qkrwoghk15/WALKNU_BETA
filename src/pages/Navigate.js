@@ -1,29 +1,24 @@
 import React from "react";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
-import Alert from 'react-bootstrap/Alert'
-import Button from 'react-bootstrap/Button'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
-import Toast from 'react-bootstrap/Toast'
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
 const popover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Popover right</Popover.Title>
-      <Popover.Content>
-        And here's some <strong>amazing</strong> content. It's very engaging.
-        right?
-      </Popover.Content>
-    </Popover>
+  <Popover id="popover-basic">
+    <Popover.Title as="h3">Popover right</Popover.Title>
+    <Popover.Content>
+      And here's some <strong>amazing</strong> content. It's very engaging.
+      right?
+    </Popover.Content>
+  </Popover>
 );
 
 class Navigate extends React.Component {
     constructor (props) {
       super(props)
-
-      const navermaps = window.naver.maps;
-  
+      this.mapRef = React.createRef();
+      this.markerRef = React.createRef();
       this.state = {
         // min max zoom
         minZoom: 13,
@@ -50,15 +45,15 @@ class Navigate extends React.Component {
         mapDataControl: true,
         zoomControl: true,
         zoomControlOptions: { //줌 컨트롤의 옵션
-            position: navermaps.Position.TOP_RIGHT
+            position: window.naver.maps.Position.TOP_RIGHT
         },
         mapTypeControl: true,
       }
     }
   
-    render () {
+    render () { 
       const navermaps = window.naver.maps;
-  
+
       var polylinePath = [
         new navermaps.LatLng(37.4526437, 126.49236),
         new navermaps.LatLng(37.4768068, 126.4847975),
@@ -102,41 +97,60 @@ class Navigate extends React.Component {
         new navermaps.LatLng(37.2877049, 127.0692822),
         new navermaps.LatLng(35.890425, 128.611994)
     ];
+    var HOME_PATH = window.HOME_PATH || '.';
+    var contentString = [
+          '<div class="iw_inner">',
+          '   <h3>서울특별시청</h3>',
+          '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
+          '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />',
+          '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
+          '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+          '   </p>',
+          '</div>'
+      ].join('');
+  
+    var infowindow = new navermaps.InfoWindow({
+        content: contentString
+    });
 
-      return (
-        <NaverMap 
-            mapDivId={"react-naver-map"} // default: react-naver-map
-            style={{
-                width: '100%',
-                height: '100%',
+    return (
+      <NaverMap
+        ref={this.mapRef}
+        mapDivId={"react-naver-map"} // default: react-naver-map
+        style={{
+            width: '100%',
+            height: '100%',
+        }}
+        defaultCenter={new navermaps.LatLng(35.890425, 128.611994)} //지도의 초기 중심 좌표
+        defaultZoom={17} //지도의 초기 줌 레벨
+        {...this.state}
+        >
+
+        <Marker
+            ref={this.markerRef}
+            position={new navermaps.LatLng(35.890425, 128.611994)}
+            animation={navermaps.Animation.BOUNCE}
+            onClick={()=>{
+              if (infowindow.getMap()) {
+                infowindow.close();
+              } else {
+                infowindow.open(this.mapRef, this.markerRef);
+              }
             }}
-            defaultCenter={new navermaps.LatLng(35.890425, 128.611994)} //지도의 초기 중심 좌표
-            defaultZoom={17} //지도의 초기 줌 레벨
-            {...this.state}
-            >
+        />
 
-            {/* <OverlayTrigger trigger="click" placement="top" overlay={popover}></OverlayTrigger> */}
-                <Marker 
-                    position={new navermaps.LatLng(35.890425, 128.611994)}
-                    animation={navermaps.Animation.BOUNCE}
-                    onClick={() => {
-
-                      }}
-                />
-            
-
-            <Polyline 
-                path={polylinePath}
-                clickable={true} // 사용자 인터랙션을 받기 위해 clickable을 true로 설정합니다.
-                strokeColor={'#5347AA'}
-                //strokeStyle={'longdash'}
-                strokeOpacity={0.5}
-                strokeWeight={5}        
-            />
-        </NaverMap>
-      )
-    }
+        <Polyline 
+            path={polylinePath}
+            clickable={true} // 사용자 인터랙션을 받기 위해 clickable을 true로 설정합니다.
+            strokeColor={'#5347AA'}
+            //strokeStyle={'longdash'}
+            strokeOpacity={0.5}
+            strokeWeight={5}        
+        />
+      </NaverMap>
+    )
   }
+}
 
 <RenderAfterNavermapsLoaded
     clientId={YOUR_CLIENT_ID}
