@@ -24,12 +24,10 @@ a{
   text-decoration:none !important;
 }
 
-#button{
-  border: 1px solid red;
-  padding: 5px;
+.mainTitle{
   margin: 5px;
-
-  max-width: 500px;
+  font-size: 6rem;
+  text-align: center;
 }
 
 .buttonBox{
@@ -42,13 +40,13 @@ a{
   margin: 5px;
 }
 
-.buttonForm{
+.buttonBottom{
   padding: 5px;
   margin: 5px;
+  text-align: right;
 }
 
-.button{
-  border: 1px solid black;
-  padding: 5px;
-  margin: 5px;
+.buttonFunc{
+  color: white;
+  font-size: 3rem;
 }

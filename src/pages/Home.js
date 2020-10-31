@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
+import "../index.css"
 
 var createReactClass = require('create-react-class');
 
@@ -31,7 +32,7 @@ var ButtonBox = createReactClass({
     render: function() { 
         return ( 
             <div className="buttonBox"> 
-                <h1>WALKNU</h1> 
+                <h1 className="mainTitle">WALKNU</h1> 
                 <ButtonList {...this.props} /> 
                 <ButtonForm /> 
             </div> 
@@ -56,14 +57,12 @@ var ButtonList = createReactClass({
 var ButtonForm = createReactClass({ 
     render: function() { 
         return ( 
-            <div className="buttonForm"> 
-                {/* <form className="buttonForm">  */}
+            <div className="buttonBottom"> 
                 <DropdownButton id="dropdown-item-button" title="사이트">
                     <Dropdown.Item as="button">경북대학교 홈페이지</Dropdown.Item>
                     <Dropdown.Item as="button">경북대학교 lms</Dropdown.Item>
                     <Dropdown.Item as="button">에브리타임</Dropdown.Item>
                 </DropdownButton>
-                {/* </form>  */}
             </div> 
         ); 
     } 

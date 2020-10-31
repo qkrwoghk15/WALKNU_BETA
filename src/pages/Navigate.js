@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom"
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
