@@ -20,6 +20,10 @@ code {
     monospace;
 }
 
+a{
+  text-decoration:none !important;
+}
+
 #button{
   border: 1px solid red;
   padding: 5px;
@@ -29,19 +33,16 @@ code {
 }
 
 .buttonBox{
-  border: 1px solid black;
   padding: 1px;
   margin: 5px;
 }
 
 .buttonList{
-  border: 1px solid blue;
   padding: 5px;
   margin: 5px;
 }
 
 .buttonForm{
-  border: 1px solid red;
   padding: 5px;
   margin: 5px;
 }

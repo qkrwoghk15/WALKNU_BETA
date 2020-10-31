@@ -1,12 +1,66 @@
 import React from "react";
+import ReactDOM from "react-dom"
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
+import Alert from 'react-bootstrap/Alert'
+import Button from 'react-bootstrap/Button'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Popover from 'react-bootstrap/Popover'
+import Toast from 'react-bootstrap/Toast'
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
-export const Navigate = (props) => {  
-    const navermaps = window.naver.maps;
+const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Popover right</Popover.Title>
+      <Popover.Content>
+        And here's some <strong>amazing</strong> content. It's very engaging.
+        right?
+      </Popover.Content>
+    </Popover>
+);
 
-    var polylinePath = [
+class Navigate extends React.Component {
+    constructor (props) {
+      super(props)
+
+      const navermaps = window.naver.maps;
+  
+      this.state = {
+        // min max zoom
+        minZoom: 13,
+        maxZoom: 20,
+  
+        // interaction
+        draggable: true,
+        pinchZoom: true,
+        scrollWheel: true,
+        keyboardShortcuts: true,
+        disableDoubleTapZoom: false,
+        disableDoubleClickZoom: false,
+        disableTwoFingerTapZoom: false,
+  
+        // kinetic
+        disableKineticPan: false,
+  
+        // tile transition
+        tileTransition: true,
+  
+        // controls
+        scaleControl: true,
+        logoControl: true,
+        mapDataControl: true,
+        zoomControl: true,
+        zoomControlOptions: { //줌 컨트롤의 옵션
+            position: navermaps.Position.TOP_RIGHT
+        },
+        mapTypeControl: true,
+      }
+    }
+  
+    render () {
+      const navermaps = window.naver.maps;
+  
+      var polylinePath = [
         new navermaps.LatLng(37.4526437, 126.49236),
         new navermaps.LatLng(37.4768068, 126.4847975),
         new navermaps.LatLng(37.4988237, 126.4960839),
@@ -47,27 +101,30 @@ export const Navigate = (props) => {
         new navermaps.LatLng(37.3210994, 127.0517556),
         new navermaps.LatLng(37.3084352, 127.0590529),
         new navermaps.LatLng(37.2877049, 127.0692822),
-        new navermaps.LatLng(37.2762087, 127.0808982)
+        new navermaps.LatLng(35.890425, 128.611994)
     ];
 
-    return (
+      return (
         <NaverMap 
             mapDivId={"react-naver-map"} // default: react-naver-map
-            style={{                
+            style={{
                 width: '100%',
                 height: '100%',
             }}
-            defaultCenter={{ lat: 35.890425, lng: 128.611994 }}
-            defaultZoom={17}
-        >
-            <Marker 
-                position={new navermaps.LatLng(35.890425, 128.611994)}
-                animation={navermaps.Animation.BOUNCE}
-                //events={['mouseovr']}
-                onClick={() => {
-                    alert('여기는 경북대학교 본관입니다')
-                }}
-            />
+            defaultCenter={new navermaps.LatLng(35.890425, 128.611994)} //지도의 초기 중심 좌표
+            defaultZoom={17} //지도의 초기 줌 레벨
+            {...this.state}
+            >
+
+            {/* <OverlayTrigger trigger="click" placement="top" overlay={popover}></OverlayTrigger> */}
+                <Marker 
+                    position={new navermaps.LatLng(35.890425, 128.611994)}
+                    animation={navermaps.Animation.BOUNCE}
+                    onClick={() => {
+
+                      }}
+                />
+            
 
             <Polyline 
                 path={polylinePath}
@@ -78,8 +135,9 @@ export const Navigate = (props) => {
                 strokeWeight={5}        
             />
         </NaverMap>
-    );
-};
+      )
+    }
+  }
 
 <RenderAfterNavermapsLoaded
     clientId={YOUR_CLIENT_ID}
