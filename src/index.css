@@ -27,6 +27,7 @@ a{
 .mainTitle{
   padding: 50px;
   margin: 5px;
+  color: Firebrick;
   font-size: 6rem;
   text-align: center;
 }
@@ -39,7 +40,7 @@ a{
 .buttonList{
   padding: 5px;
   margin: 5px;
-  width: 60%;
+  width: 40%;
   margin: auto;
 }
 
@@ -54,5 +55,7 @@ a{
   font-size: 3rem;
 }
 .buttonlink{
-  color: #17A2B8
+  color: #DC3545;
+}.buttonLink:hover{
+  text-decoration: none !important;
 }

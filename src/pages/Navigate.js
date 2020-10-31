@@ -1,18 +1,12 @@
 import React from "react";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
-import Popover from 'react-bootstrap/Popover'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
-
-const popover = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">Popover right</Popover.Title>
-    <Popover.Content>
-      And here's some <strong>amazing</strong> content. It's very engaging.
-      right?
-    </Popover.Content>
-  </Popover>
-);
 
 class Navigate extends React.Component {
     constructor (props) {
@@ -50,7 +44,7 @@ class Navigate extends React.Component {
         mapTypeControl: true,
       }
     }
-  
+ 
     render () { 
       const navermaps = window.naver.maps;
 
@@ -97,6 +91,7 @@ class Navigate extends React.Component {
         new navermaps.LatLng(37.2877049, 127.0692822),
         new navermaps.LatLng(35.890425, 128.611994)
     ];
+
     var HOME_PATH = window.HOME_PATH || '.';
     var contentString = [
           '<div class="iw_inner">',
@@ -114,40 +109,57 @@ class Navigate extends React.Component {
     });
 
     return (
-      <NaverMap
-        ref={this.mapRef}
-        mapDivId={"react-naver-map"} // default: react-naver-map
-        style={{
-            width: '100%',
-            height: '100%',
-        }}
-        defaultCenter={new navermaps.LatLng(35.890425, 128.611994)} //지도의 초기 중심 좌표
-        defaultZoom={17} //지도의 초기 줌 레벨
-        {...this.state}
-        >
+      <div style={{width: '100%', height: '100%'}}>
+        <div>
+          <Navbar bg="danger" variant="dark">
+            <Navbar.Brand href="#home">길찾기</Navbar.Brand>
+            <Nav className="mr-auto">
+              <Nav.Link href="/">홈으로</Nav.Link>
+            </Nav>
+            <Form inline>
+              <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
+              <Button variant="outline-info">Search</Button>
+            </Form>
+          </Navbar>
+        </div>
 
-        <Marker
-            ref={this.markerRef}
-            position={new navermaps.LatLng(35.890425, 128.611994)}
-            animation={navermaps.Animation.BOUNCE}
-            onClick={()=>{
-              if (infowindow.getMap()) {
-                infowindow.close();
-              } else {
-                infowindow.open(this.mapRef, this.markerRef);
-              }
+        <div style={{width: '100%', height: '100%'}}>
+          <NaverMap
+            ref={this.mapRef}
+            mapDivId={"react-naver-map"} // default: react-naver-map
+            style={{
+                width: '100%',
+                height: '100%',
             }}
-        />
+            defaultCenter={new navermaps.LatLng(35.890425, 128.611994)} //지도의 초기 중심 좌표
+            defaultZoom={17} //지도의 초기 줌 레벨
+            {...this.state}
+            >
 
-        <Polyline 
-            path={polylinePath}
-            clickable={true} // 사용자 인터랙션을 받기 위해 clickable을 true로 설정합니다.
-            strokeColor={'#5347AA'}
-            //strokeStyle={'longdash'}
-            strokeOpacity={0.5}
-            strokeWeight={5}        
-        />
-      </NaverMap>
+            <Marker
+                ref={this.markerRef}
+                position={new navermaps.LatLng(35.890425, 128.611994)}
+                animation={navermaps.Animation.BOUNCE}
+                onClick={()=>{
+                  if (infowindow.getMap()) {
+                    infowindow.close();
+                  } else {
+                    infowindow.open(this.mapRef, this.markerRef);
+                  }
+                }}
+            />
+
+            <Polyline 
+                path={polylinePath}
+                clickable={true} // 사용자 인터랙션을 받기 위해 clickable을 true로 설정합니다.
+                strokeColor={'#5347AA'}
+                //strokeStyle={'longdash'}
+                strokeOpacity={0.5}
+                strokeWeight={5}        
+            />
+          </NaverMap>
+        </div>
+      </div>
     )
   }
 }

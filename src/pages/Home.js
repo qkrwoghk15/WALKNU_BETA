@@ -16,7 +16,7 @@ var data = [
 var MyButton = createReactClass({ 
     render: function() {
         return ( 
-            <Button variant="info" size="lg" block>
+            <Button variant="danger" size="lg" block>
                 <Link className="buttonlink" to = {this.props.func}>
                     <h2 className="buttonFunc"> 
                         {this.props.funcName} 
