@@ -13,8 +13,6 @@ const YOUR_CLIENT_ID = "pzvby0c802a";
 class Navigate extends React.Component {
     constructor (props) {
       super(props)
-      this.mapRef = React.createRef();
-      this.markerRef = React.createRef();
       this.state = {
         show: false,
 
@@ -169,7 +167,7 @@ class Navigate extends React.Component {
               }
             />
 
-            <Overlay >{this.state.show ? <popover></popover> : <></>}</Overlay>
+            <Overlay>{this.state.show ? <popover></popover> : <></>}</Overlay>
 
             <Polyline 
                 path={polylinePath}

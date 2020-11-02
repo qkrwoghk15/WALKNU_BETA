@@ -9,7 +9,6 @@ import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import Table from 'react-bootstrap/Table'
 
-export const formik = Formik;
 const schema = yup.object({
     file: yup.string().required(),  
     terms: yup.bool().required(),
@@ -104,7 +103,7 @@ const TimeTable = () => {
 
     function FileForm(){
         return(
-            <formik
+            <Formik
                 validationSchema={schema}
                 onSubmit={console.log} 
             >
@@ -148,7 +147,7 @@ const TimeTable = () => {
                         </Form.row>
                     </Form>
                 )}
-            </formik>
+            </Formik>
         );
     }
 
