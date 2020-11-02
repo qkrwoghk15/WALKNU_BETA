@@ -5,6 +5,8 @@ import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Popover from 'react-bootstrap/Popover'
+import Overlay from 'react-bootstrap/Overlay'
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
@@ -14,6 +16,8 @@ class Navigate extends React.Component {
       this.mapRef = React.createRef();
       this.markerRef = React.createRef();
       this.state = {
+        show: false,
+
         // min max zoom
         minZoom: 13,
         maxZoom: 20,
@@ -105,8 +109,28 @@ class Navigate extends React.Component {
       ].join('');
   
     var infowindow = new navermaps.InfoWindow({
-        content: contentString
+      position: new navermaps.LatLng(35.890425, 128.611994),
+      content: contentString,
+      /*maxWidth: 140,
+      backgroundColor: "#eee",
+      borderColor: "#2db400",
+      borderWidth: 5,
+      anchorSize: new window.N.Size(30, 30),
+      anchorSkew: true,
+      anchorColor: "#eee",
+
+      pixelOffset: new window.N.Point(20, -20)*/
     });
+
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">Popover right</Popover.Title>
+        <Popover.Content>
+          And here's some <strong>amazing</strong> content. It's very engaging.
+          right?
+        </Popover.Content>
+      </Popover>
+    );
 
     return (
       <div style={{width: '100%', height: '100%'}}>
@@ -117,8 +141,8 @@ class Navigate extends React.Component {
               <Nav.Link href="/">홈으로</Nav.Link>
             </Nav>
             <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-              <Button variant="outline-info">Search</Button>
+              <FormControl type="text" placeholder="목적지" className="mr-sm-2"/>
+              <Button variant="success">Search</Button>
             </Form>
           </Navbar>
         </div>
@@ -137,17 +161,15 @@ class Navigate extends React.Component {
             >
 
             <Marker
-                ref={this.markerRef}
-                position={new navermaps.LatLng(35.890425, 128.611994)}
-                animation={navermaps.Animation.BOUNCE}
-                onClick={()=>{
-                  if (infowindow.getMap()) {
-                    infowindow.close();
-                  } else {
-                    infowindow.open(this.mapRef, this.markerRef);
-                  }
-                }}
+              ref={this.markerRef}
+              position={new navermaps.LatLng(35.890425, 128.611994)}
+              animation={navermaps.Animation.BOUNCE}
+              onClick={()=>
+                this.setState({show: !this.state.show })
+              }
             />
+
+            <Overlay >{this.state.show ? <popover></popover> : <></>}</Overlay>
 
             <Polyline 
                 path={polylinePath}

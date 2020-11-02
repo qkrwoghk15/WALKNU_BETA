@@ -58,7 +58,7 @@ var ButtonForm = createReactClass({
     render: function() { 
         return ( 
             <div className="buttonBottom"> 
-                <DropdownButton id="dropdown-item-button" title="사이트">
+                <DropdownButton variant="" id="dropdown-item-button" title="사이트">
                     <Dropdown.Item as="button">경북대학교 홈페이지</Dropdown.Item>
                     <Dropdown.Item as="button">경북대학교 lms</Dropdown.Item>
                     <Dropdown.Item as="button">에브리타임</Dropdown.Item>
