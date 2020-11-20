@@ -44,9 +44,9 @@ var ButtonList = createReactClass({
     render: function() { 
         var buttons = this.props.data.map(function(button, index){ 
             return <MyButton funcName={button.funcName} func={button.func} key={index}>{button.text}</MyButton>
-         }.bind(this)); 
+        }.bind(this)); 
          
-         return ( 
+        return ( 
             <div className="buttonList"> 
                 {buttons}
             </div> 

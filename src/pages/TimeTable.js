@@ -1,13 +1,13 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import Button from 'react-bootstrap/Button'
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import Table from 'react-bootstrap/Table'
+
+import SearchSubTable from '../components/SearchSubTable.js'
 
 const schema = yup.object({
     file: yup.string().required(),  
@@ -96,10 +96,71 @@ const TimeTable = () => {
                         </tr>
                     </tbody>
                 </Table>
-                <Button type="submit">Submit</Button>
+                <div style={{textAlign: 'right'}}>
+                    <Button type="submit">Submit</Button>
+                </div>
             </div>
         );
     }
+
+    // function SubjectTable() {
+        
+
+    //     const handleChange =(e)=>{
+
+    //     }
+
+    //     const html=list.map((m)=>
+    //         <tr>
+    //             <td>{m.rank}</td>
+    //             <td>
+    //                 {
+    //                     m.state==="상승" &&
+    //                         <span style={{"color":"red"}}>▲{m.idcrement}</span>
+    //                 }
+    //                 {
+    //                     m.state==="하강" &&
+    //                     <span style={{"color":"blue"}}>▼{m.idcrement}</span>
+    //                 }
+    //                 {
+    //                     m.state==="유지" &&
+    //                     <span style={{"color":"grey"}}>-</span>
+    //                 }
+    //             </td>
+    //             <td><img src={m.poster} width={"35"} height={"35"}/></td>
+    //             <td>{m.title}</td>
+    //             <td>{m.singer}</td>
+    //         </tr>
+    //     )
+        
+    //     return(
+    //         <div className={"row"}>
+    //             <H/>
+    //             <div style={{"height":"30px"}}></div>
+    //             <table className={"table"}>
+    //                 <tr>
+    //                     <td>
+    //                         <input type={"text"} className={"input-sm"} size={"25"} onChange={handleChange}/>
+    //                     </td>
+    //                 </tr>
+    //             </table>
+    //             <Table className={"table"} responsive>
+    //                 <thread>
+    //                     <tr className={"success"}>
+    //                         <td>순위</td>
+    //                         <td>등폭</td>
+    //                         <td></td>
+    //                         <td>노래명</td>
+    //                         <td>가수명</td>
+    //                     </tr>
+    //                 </thread>
+    //                 <tbody>
+    //                     {html}
+    //                 </tbody>
+    //             </Table>
+    //         </div>
+    //     )
+    // }
 
     function FileForm(){
         return(
@@ -163,33 +224,8 @@ const TimeTable = () => {
             </div>
 
             <div>
-                <Accordion>
-                    <Card>
-                        <Card.Header>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            직접 입력하기
-                        </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>
-                                <TableForm></TableForm>
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-
-                    <Card>
-                        <Card.Header>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                            사진 입력하기
-                        </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="1">
-                        <Card.Body>
-                            <FileForm></FileForm>
-                        </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
+                <TableForm></TableForm>
+                <SearchSubTable></SearchSubTable>
             </div>
         </div>
     );
