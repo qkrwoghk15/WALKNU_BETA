@@ -1,12 +1,14 @@
 import React from "react";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
 import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Popover from 'react-bootstrap/Popover'
 import Overlay from 'react-bootstrap/Overlay'
+import SelectSearch from 'react-select-search'; //search bar with dropdown
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
@@ -130,6 +132,13 @@ class Navigate extends React.Component {
       </Popover>
     );
 
+    const options = [
+      {name: '건물', value: 'bldg'},
+      {name: '교과목명', value: 'class'},
+      {name: '과목코드', value: 'code'}
+    ];
+
+
     return (
       <div style={{width: '100%', height: '100%'}}>
         <div>
@@ -139,7 +148,13 @@ class Navigate extends React.Component {
               <Nav.Link href="/">홈으로</Nav.Link>
             </Nav>
             <Form inline>
-              <FormControl type="text" placeholder="목적지" className="mr-sm-2"/>
+              <FormControl bg="danger" type="text" placeholder="검색어" className="mr-sm-2"/>
+              <NavDropdown title="옵션" id="basic-nav-dropdown" menuRole="navigation">
+                <NavDropdown.Item href="">건물</NavDropdown.Item>
+                <NavDropdown.Item href="">교과목명</NavDropdown.Item>
+                <NavDropdown.Item href="">과목코드</NavDropdown.Item>
+              </NavDropdown>
+              {/* <SelectSearch options={options} value="sv" name="language" placeholder="검색옵션" /> */}
               <Button variant="success">Search</Button>
             </Form>
           </Navbar>
