@@ -8,7 +8,6 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Popover from 'react-bootstrap/Popover'
 import Overlay from 'react-bootstrap/Overlay'
-import SelectSearch from 'react-select-search'; //search bar with dropdown
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
@@ -141,7 +140,7 @@ class Navigate extends React.Component {
 
     return (
       <div style={{width: '100%', height: '100%'}}>
-        <div>
+        <div> 
           <Navbar bg="danger" variant="dark">
             <Navbar.Brand href="#home">길찾기</Navbar.Brand>
             <Nav className="mr-auto">
@@ -154,7 +153,6 @@ class Navigate extends React.Component {
                 <NavDropdown.Item href="">교과목명</NavDropdown.Item>
                 <NavDropdown.Item href="">과목코드</NavDropdown.Item>
               </NavDropdown>
-              {/* <SelectSearch options={options} value="sv" name="language" placeholder="검색옵션" /> */}
               <Button variant="success">Search</Button>
             </Form>
           </Navbar>
