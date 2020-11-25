@@ -1,13 +1,14 @@
 import React from "react";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, Polyline } from "react-naver-maps";
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Popover from 'react-bootstrap/Popover'
 import Overlay from 'react-bootstrap/Overlay'
+import Dialog from 'react-bootstrap-dialog'
+import SkyLight from 'react-skylight';
 
 const YOUR_CLIENT_ID = "pzvby0c802a";
 
@@ -44,10 +45,10 @@ class Navigate extends React.Component {
         zoomControlOptions: { //줌 컨트롤의 옵션
             position: window.naver.maps.Position.TOP_RIGHT
         },
-        mapTypeControl: true,
+        mapTypeControl: true
       }
     }
- 
+
     render () { 
       const navermaps = window.naver.maps;
 
@@ -131,12 +132,7 @@ class Navigate extends React.Component {
       </Popover>
     );
 
-    const options = [
-      {name: '건물', value: 'bldg'},
-      {name: '교과목명', value: 'class'},
-      {name: '과목코드', value: 'code'}
-    ];
-
+    
 
     return (
       <div style={{width: '100%', height: '100%'}}>
@@ -148,16 +144,28 @@ class Navigate extends React.Component {
             </Nav>
             <Form inline>
               <FormControl bg="danger" type="text" placeholder="검색어" className="mr-sm-2"/>
-              <NavDropdown title="옵션" id="basic-nav-dropdown" menuRole="navigation">
-                <NavDropdown.Item href="">건물</NavDropdown.Item>
-                <NavDropdown.Item href="">교과목명</NavDropdown.Item>
-                <NavDropdown.Item href="">과목코드</NavDropdown.Item>
-              </NavDropdown>
               <Button variant="success">Search</Button>
             </Form>
           </Navbar>
         </div>
-
+        <div>
+          <section>
+            <Button variant="primary" onClick={() => this.simpleDialog.show()}>길찾기</Button>
+          </section>
+          <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="길찾기">
+            <Form inline>
+              <FormControl bg="danger" type="text" placeholder="출발지" className="mr-sm-2"/>
+              <Button variant="Light">현위치</Button>
+            </Form>
+            <Form inline>
+              <FormControl bg="danger" type="text" placeholder="도착지" className="mr-sm-2"/>
+            </Form>
+            <Form inline>
+              <Button variant="success">Search</Button>
+            </Form>
+            
+          </SkyLight>
+        </div>
         <div style={{width: '100%', height: '100%'}}>
           <NaverMap
             ref={this.mapRef}
@@ -170,7 +178,6 @@ class Navigate extends React.Component {
             defaultZoom={17} //지도의 초기 줌 레벨
             {...this.state}
             >
-
             <Marker
               ref={this.markerRef}
               position={new navermaps.LatLng(35.890425, 128.611994)}
