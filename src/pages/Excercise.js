@@ -60,8 +60,8 @@ class Navigate extends React.Component {
     return (
       <div style={{width: '100%', height: '100%'}}>
         <div>
-          <Navbar bg="danger" variant="dark">
-            <Navbar.Brand href="#home">운동</Navbar.Brand>
+          <Navbar collapseOnSelect bg="danger" variant="dark" expand="lg">
+            <Navbar.Brand href="#home"style={{fontSize: '200%', verticalAlign: 'text-bottom'}}>운동</Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link href="/">홈으로</Nav.Link>
             </Nav>

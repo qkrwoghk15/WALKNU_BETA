@@ -1,0 +1,36 @@
+.mainTitle{
+    padding: 50px;
+    margin: 5px;
+    color: Firebrick;
+    font-size: 6rem;
+    text-align: center;
+}
+
+.buttonBox{
+    padding: 1px;
+    margin: 5px;
+}
+
+.buttonList{
+    padding: 5px;
+    margin: 5px;
+    width: 40%;
+    text-orientation: horizontal;
+    margin: auto;
+}
+
+.buttonBottom{
+    padding: 5px;
+    margin: 5px;
+    text-align: right;
+}
+
+.buttonFunc{
+    color: white;
+    font-size: 3rem;
+}
+.buttonlink{
+    color: #DC3545;
+}.buttonLink:hover{
+    text-decoration: none !important;
+}
